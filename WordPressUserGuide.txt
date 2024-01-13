@@ -1,0 +1,63 @@
+
+#Here's a streamlined layout of the commands for setting up WordPress on Ubuntu, including brief descriptions for each:
+
+Install Apache Server: sudo apt install apache2
+Installs the Apache web server.
+
+Install PHP and MySQL Connector: sudo apt install php libapache2-mod-php php-mysql
+Installs PHP and its modules to connect with MySQL.
+
+Install MySQL Server: sudo apt install mysql-server
+Installs the MySQL database server.
+
+Login to MySQL Server: sudo mysql -u root
+Logs into the MySQL server as the root user.
+
+Change MySQL Root Authentication:
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password by 'your_strong_password';
+Changes the authentication method and sets a new password for the root user.
+
+Create WordPress Database User:
+CREATE USER 'wp_user'@localhost IDENTIFIED BY 'your_strong_password';
+Creates a new user for WordPress.
+
+Create WordPress Database: CREATE DATABASE wp;
+Creates a new database for WordPress.
+
+Grant Database Privileges:
+GRANT ALL PRIVILEGES ON wp.* TO 'wp_user'@localhost;
+Grants all privileges on the WordPress database to the new user.
+
+Download WordPress:
+cd /tmp and wget https://wordpress.org/latest.tar.gz
+Changes directory to /tmp and downloads the latest WordPress package.
+
+Extract WordPress: tar -xvf latest.tar.gz
+Extracts the WordPress package.
+
+Move WordPress to Apache Root: sudo mv wordpress/ /var/www/html
+Moves the WordPress folder to the Apache document root.
+
+Restart Apache Server: sudo systemctl restart apache2
+Restarts the Apache server to apply changes.
+
+For setting file permissions:
+
+Navigate to WordPress Directory: cd /var/www/html/wordpress
+Changes directory to the WordPress installation folder.
+
+Set Directory Permissions: sudo find . -type d -exec chmod 755 {} \;
+Sets the permissions of directories to 755.
+
+Set File Permissions: sudo find . -type f -exec chmod 644 {} \;
+Sets the permissions of files to 644.
+
+Change Ownership to Web Server User: sudo chown -R www-data:www-data .
+Changes the ownership of files and directories to the Apache user (www-data).
+
+Install certbot
+sudo apt-get update
+sudo apt install certbot python3-certbot-apache
+
+Request and install ssl on your site with certbot
+sudo certbot --apache
